@@ -1,0 +1,35 @@
+<h2>List of Works</h2>
+
+<%= ["album", "book", "movie"].each do |media| %>
+<section class="media-table">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Votes</th>
+      <th scope="col">Title</th>
+      <th scope="col">Created By</th>
+      <th scope="col">Published</th>
+      <th scope="col">Upvote</th>
+    </tr>
+  </thead>
+  <tbody>
+    <h4><%= media.capitalize + "s" %></h4>
+    <% @works.each do |work| %>
+    <% if work.category == media %>
+    <tr>
+      <th scope="row">
+        <%= rand(1..10) %> </th>
+      <td> <%= link_to work.title, work_path(work) %> </td>
+      <td> <%= work.creator %> </td>
+      <td> <%= work.publication_year %> </td>
+      <td>
+        <% link_to "Upvote", "/" %>
+      </td>
+    </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
+</section>
+<% end %>
+

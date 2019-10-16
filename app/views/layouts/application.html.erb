@@ -8,7 +8,22 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+    <h1>
+      Media Ranker | Ranking the Best of Everything
+    </h1>
+    <nav>
+      <ul>
+        <li>
+          <%= link_to "View Top Media", root_path %>
+        </li>
+        <li>
+          <%= link_to "View All Media", works_path %>
+        </li>
+        <li>
+          <%= link_to "Add A New Work", new_work_path %>
+        </li>
+      </ul>
+    </nav>
   <body>
     <%= yield %>
   </body>
