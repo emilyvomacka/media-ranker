@@ -1,1 +1,26 @@
-<h2>Here is a homepage</h2>
+
+<% spotlight = Work.spotlight %>
+<h2>
+  Media Spotlight <%= link_to spotlight.title, work_path(spotlight)%> by <%= spotlight.creator %> 
+</h2>
+<p> 
+  <%= spotlight.votes %> votes - <%= spotlight.description %>
+</p>
+
+<hr/>
+
+<% ["movie", "book", "album"].each do |media| %>
+<section>
+  <h2>Top <%= media.capitalize + "s" %></h2>
+  <ul>
+  <% Work.where(category: media).sample(10).each do |item| %>
+    <li>
+      <h4><%= link_to item.title, work_path(item) %>
+      <small> by <%= item.creator %></small>
+      </h4>
+      <p><%= item.votes %> votes 
+    </li>
+  <% end %>
+</section>
+<% end %>
+
