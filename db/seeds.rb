@@ -8,7 +8,7 @@ require 'csv'
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-WORK_FILE = Rails.root.join('db', 'media-seeds.csv')
+WORK_FILE = Rails.root.join('db', 'media_seeds.csv')
 puts "Loading raw driver data from #{WORK_FILE}"
 
 work_failures = []
