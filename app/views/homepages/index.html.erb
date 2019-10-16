@@ -13,7 +13,7 @@
 <section>
   <h2>Top <%= media.capitalize + "s" %></h2>
   <ul>
-  <% Work.where(category: media).sample(10).each do |item| %>
+  <% Work.top_ten(media).each do |item| %>
     <li>
       <h4><%= link_to item.title, work_path(item) %>
       <small> by <%= item.creator %></small>

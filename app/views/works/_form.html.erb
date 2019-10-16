@@ -1,0 +1,21 @@
+<% if @work.errors.any? %>
+  <section class="alert alert-warning">
+  <p>A problem occurred: Could not <%= verb_name @work.category %> </p>
+  <ul>
+    <% @work.errors.each do |column, message| %>
+      <li>
+        <%= column %>: <% message %>
+      </li>
+    <% end %>
+  </ul>
+  </section>
+<% end %>
+
+<%= form_with model: @work, class: "work-input" do |f| %>
+  <%= f.label :category %>
+  <%= f.select :category, ["book", "album", "movie"] %>
+  
+  <%= f.submit "#{verb_name} Work"%>
+
+<% end %>
+

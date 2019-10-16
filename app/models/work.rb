@@ -1,3 +1,5 @@
+require 'pry'
+
 class Work < ApplicationRecord
 
   def self.spotlight
@@ -9,6 +11,10 @@ class Work < ApplicationRecord
   end 
 
   def self.top_ten(media)
-    return Work.where(category: "#{media}").select(10)
+    if self.count > 10
+      return self.where(category: media).sample(10)
+    else 
+      return self.where(category: media).sample(self.count / 2)
+    end 
   end 
 end
