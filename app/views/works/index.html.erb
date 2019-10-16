@@ -17,14 +17,11 @@
     <% @works.each do |work| %>
     <% if work.category == media %>
     <tr>
-      <th scope="row">
-        <%= rand(1..10) %> </th>
-      <td> <%= link_to work.title, work_path(work) %> </td>
+      <th scope="row"><%= rand(1..10) %></th>
+      <td> <%= link_to work.title, work_path(work) %></td>
       <td> <%= work.creator %> </td>
-      <td> <%= work.publication_year %> </td>
-      <td>
-        <% link_to "Upvote", "/" %>
-      </td>
+      <td> <%= work.publication_year %></td>
+      <td><% link_to "Upvote", "/" %></td>
     </tr>
     <% end %>
     <% end %>
