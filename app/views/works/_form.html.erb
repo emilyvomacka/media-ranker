@@ -1,10 +1,10 @@
 <% if @work.errors.any? %>
   <section class="alert alert-warning">
-  <p>A problem occurred: Could not <%= verb_name @work.category %> </p>
+  <p>A problem occurred: Could not update <%= @work.category %> </p>
   <ul>
     <% @work.errors.each do |column, message| %>
       <li>
-        <%= column %>: <% message %>
+        <%= column %>: <%= message %>
       </li>
     <% end %>
   </ul>
@@ -12,10 +12,32 @@
 <% end %>
 
 <%= form_with model: @work, class: "work-input" do |f| %>
+  <div>
   <%= f.label :category %>
   <%= f.select :category, ["book", "album", "movie"] %>
+  </div>
   
-  <%= f.submit "#{verb_name} Work"%>
+  <div>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  </div>
+
+  <div>
+  <%= f.label :creator %>
+  <%= f.text_field :creator %>
+  </div>
+
+  <div>
+  <%= f.label :publication_year %>
+  <%= f.text_field :publication_year %>
+  </div>
+
+  <div>
+  <%= f.label :description %>
+  <%= f.text_area :description%>
+  </div>
+
+  <%= f.submit "#{action_name} Work"%>
 
 <% end %>
 

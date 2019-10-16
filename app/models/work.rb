@@ -12,10 +12,12 @@ class Work < ApplicationRecord
   end 
 
   def self.top_ten(media)
-    if self.count > 10
-      return self.where(category: media).sample(10)
+    category_subset = self.where(category: "#{media}")
+    if category_subset.count > 20
+      return category_subset.sample(10)
     else 
-      return self.where(category: media).sample(self.count / 2)
+      half = category_subset.count / 2
+      return category_subset.sample(half)
     end 
   end 
 end

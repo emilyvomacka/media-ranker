@@ -5,13 +5,13 @@ class WorksController < ApplicationController
   def index
     @works = Work.all
   end 
-
+  
   def show ; end 
-
+  
   def new 
     @work = Work.new
   end 
-
+  
   def create
     @work = Work.new(work_params)
     if @work.save
@@ -26,10 +26,10 @@ class WorksController < ApplicationController
   end 
   
   def edit ; end
-
+  
   def update
     if @work.update(work_params)
-      flash[:success] = "Successfully updated #{work.category} #{work.id}."
+      flash[:success] = "Successfully updated #{@work.category} #{@work.id}"
       redirect_to work_path(@work)
       return
     else
@@ -38,26 +38,26 @@ class WorksController < ApplicationController
       return
     end 
   end 
-
+  
   def destroy 
     @work = Work.find_by(id: params[:id])
     if @work.destroy
-    flash[:success] = "Successfully destroyed #{@work.category} #{@work.id}."
-    redirect_to root_path
-    return 
+      flash[:success] = "Successfully destroyed #{@work.category} #{@work.id}"
+      redirect_to root_path
+      return 
     end 
   end 
-
+  
   private
-
+  
   def work_params
     return params.require(:work).permit(:category, :title, :creator, :publication_year, :description)
   end 
-
+  
   def find_work
     @work = Work.find_by(id: params[:id])
   end 
-
+  
   def if_work_missing
     if @work.nil?
       flash[:error] = "Work with id #{params[:id]} was not found."

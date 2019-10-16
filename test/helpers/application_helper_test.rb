@@ -1,6 +1,6 @@
 require "test_helper"
 
-describe ApplicationHelper do 
+describe ApplicationHelper, :helper do 
   describe 'readable date' do
     #nominal success case
     it 'returns correctly formatted date with full timestamp from expected input' do 
