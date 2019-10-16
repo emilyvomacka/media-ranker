@@ -1,6 +1,7 @@
-require 'pry'
-
 class Work < ApplicationRecord
+  validates :title, presence: true
+  validates :creator, presence: true
+
 
   def self.spotlight
     return self.all.sample

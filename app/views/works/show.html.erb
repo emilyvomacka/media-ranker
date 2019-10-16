@@ -3,6 +3,7 @@
   <p>Created by: <%= @work.creator %> </p>
   <p>Published: <%= @work.publication_year %>
   <p><%= @work.description %></p>
+  <p>Added to the site <%= readable_date(@work.created_at) %></p>
 
   <section>
     <%= link_to "Back to media ranks", root_path %>

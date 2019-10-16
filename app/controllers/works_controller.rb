@@ -1,16 +1,12 @@
 class WorksController < ApplicationController
-  before_action :find_work, only: [:show, :edit, :update]
+  before_action :find_work, only: [:show, :edit, :update, :destroy]
+  before_action :if_work_missing, only: [:show, :edit, :destroy]
   
   def index
     @works = Work.all
   end 
 
-  def show 
-    if @work.nil?
-      head :not_found
-      return
-    end 
-  end 
+  def show ; end 
 
   def new 
     @work = Work.new
@@ -29,12 +25,7 @@ class WorksController < ApplicationController
     end 
   end 
   
-  def edit 
-    if @work.nil?
-      head :not_found
-      return
-    end 
-  end
+  def edit ; end
 
   def update
     if @work.update(work_params)
@@ -42,21 +33,16 @@ class WorksController < ApplicationController
       redirect_to work_path(@work)
       return
     else
-      render :edit
       flash.now[:failure] = "Work failed to save"
+      render :edit
       return
     end 
   end 
 
   def destroy 
     @work = Work.find_by(id: params[:id])
-    if @work.nil?
-      head :not_found
-      return
-    end 
-
     if @work.destroy
-    flash[:success] = "Successfully destroyed #{work.category} #{work.id}."
+    flash[:success] = "Successfully destroyed #{@work.category} #{@work.id}."
     redirect_to root_path
     return 
     end 
@@ -70,5 +56,13 @@ class WorksController < ApplicationController
 
   def find_work
     @work = Work.find_by(id: params[:id])
+  end 
+
+  def if_work_missing
+    if @work.nil?
+      flash[:error] = "Work with id #{params[:id]} was not found."
+      head :not_found
+      return
+    end
   end 
 end

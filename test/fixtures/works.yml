@@ -1,0 +1,36 @@
+okc:
+  category: album
+  title: OK Computer    
+  creator: Radiohead  
+  publication_year: "1997"
+  description: airbag 
+kida: 
+  category: album
+  title: Kid A
+  creator: Radiohead  
+  publication_year: "2000"  
+  description: everything in its right place
+amnesiac: 
+  category: album
+  title: Amnesiac
+  creator: Radiohead
+  publication_year: "2001"
+  description: packt like sardines   
+httt:
+  category: album
+  title: Hail To The Thief  
+  creator: Radiohead
+  publication_year: "2003"
+  description: "2 + 2 = 5"
+trickmirror:
+  category: book
+  title: Trick Mirror 
+  creator: Jia Tolentino
+  publication_year: "2019"
+  description: essays
+starwars: 
+  category: movie
+  title: Star Wars
+  creator: George Lucas
+  publication_year: "2000"
+  description: space
