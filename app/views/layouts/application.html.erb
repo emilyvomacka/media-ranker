@@ -22,6 +22,18 @@
         <li>
           <%= link_to "Add a new work", new_work_path %>
         </li>
+        <% if session[:user_id] %>
+          <li>
+            <%= link_to "Logged in as #{User.find_by(id: session[:user_id]).username}", user_path(session[:user_id])%>
+          </li>
+          <li>
+            <%= link_to "Logout", logout_path, method: :post %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to "Login", login_path %>
+          </li>
+        <% end %>
       </ul>
     </nav>
   <body>
