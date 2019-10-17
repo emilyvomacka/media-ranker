@@ -4,7 +4,7 @@
   Media Spotlight <%= link_to spotlight.title, work_path(spotlight)%> by <%= spotlight.creator %> 
 </h2>
 <p> 
-  <%= spotlight.votes %> votes - <%= spotlight.description %>
+  <%= spotlight.votes.count %> votes - <%= spotlight.description %>
 </p>
 
 <hr/>
@@ -18,7 +18,7 @@
       <h4><%= link_to item.title, work_path(item) %>
       <small> by <%= item.creator %></small>
       </h4>
-      <p><%= item.votes %> votes 
+      <p><%= item.votes.count %> votes 
     </li>
   <% end %>
 </section>

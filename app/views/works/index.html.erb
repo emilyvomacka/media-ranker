@@ -14,16 +14,14 @@
   </thead>
   <tbody>
     <h4><%= media.capitalize + "s" %></h4>
-    <% @works.each do |work| %>
-    <% if work.category == media %>
+    <% Work.category_desc_by_vote_count(media).each do |work| %>
     <tr>
-      <th scope="row"><%= rand(1..10) %></th>
+      <th scope="row"><%= work.votes.count %></th>
       <td> <%= link_to work.title, work_path(work) %></td>
       <td> <%= work.creator %> </td>
       <td> <%= work.publication_year %></td>
-      <td><% link_to "Upvote", "/" %></td>
+      <td><% link_to "Upvote", upvote_work_path(work) %></td>
     </tr>
-    <% end %>
     <% end %>
   </tbody>
 </table>
