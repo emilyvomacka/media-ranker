@@ -1,6 +1,19 @@
 require "test_helper"
 
 describe User do
+
+  let (:new_user) {
+    User.new(username: "newuser")
+  }
+
+  it "can be instantiated" do 
+    expect(new_user.valid?).must_equal true
+  end 
+
+  it "will have the required fields" do
+    expect(new_user).must_respond_to :username
+  end 
+
   describe "relations" do 
     it "has many votes" do 
       user_a = users(:a)

@@ -12,7 +12,6 @@ describe Work do
   it "will have the required fields" do
     new_work.save
     work = Work.first
-    puts work.title
     [:category, :title, :creator, :publication_year, :description].each do |field|
       expect(work).must_respond_to field
     end 
