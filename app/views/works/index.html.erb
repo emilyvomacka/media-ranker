@@ -1,6 +1,6 @@
 <h2>List of Works</h2>
 
-<% ["album", "book", "movie"].each do |media| %>
+<% Work::CATEGORIES.each do |media| %>
   <% if Work.category_desc_by_vote_count(media) == nil %>
     <h4>
       No <%= media.capitalize + "s" %> in database...yet. <%= link_to "Add a new work!", new_work_path %>
@@ -34,4 +34,4 @@
     </table>
     </section>
 <% end %>
-
+<% end %>

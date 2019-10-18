@@ -9,10 +9,10 @@
 <p> 
   <%= spotlight.votes.count %> votes - <%= spotlight.description %>
 </p>
-
+<% end %>
 <hr/>
 
-<% ["movie", "book", "album"].each do |media| %>
+<% Work::CATEGORIES.each do |media| %>
 <section>
   <h2>
   <% if Work.top_ten(media) == nil %>

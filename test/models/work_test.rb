@@ -57,43 +57,50 @@ describe Work do
   
   describe "custom methods" do
     describe "top_ten" do
+      before do
+        @top_ten = Work.top_ten("album")
+      end 
       it 'returns 10 items when the list of works is greater than 20' do
         25.times do 
           work = Work.create(category: "album", title: "a", creator: "b", publication_year: "1990", description: "e")
         end 
-        top_ten = Work.top_ten("album")
-        expect(top_ten.length).must_equal 10
+        expanded_pool_top_ten = Work.top_ten("album")
+        expect(expanded_pool_top_ten.length).must_equal 10
       end 
       
       it 'returns a list of length Work.count / 2, when Work.count < 10' do
-        top_ten = Work.top_ten("album")
-        expect(top_ten.length).must_equal 2
+        expect(@top_ten.length).must_equal 2
       end 
       
       it 'returns a list ordered by vote count' do
-        top_ten = Work.top_ten("album")
-        assert_operator top_ten.first.votes.count, :>, top_ten.last.votes.count
+        assert_operator @top_ten.first.votes.count, :>, @top_ten.last.votes.count
       end 
 
       it 'returns works with a tied number of votes in alphabetical order by title' do
-
-      end 
-
-      #how does it handle works with no votes 
+        puts @top_ten
+        assert_operator @top_ten[1].title, :>, @top_ten[2].title
+      end
     end
   end 
 
   describe 'category_desc_by_vote_count' do
+    before do
+      @best_albums = Work.category_desc_by_vote_count("album") 
+    end 
     it 'returns a list of all works in a given category ordered by vote count' do
-      best_albums = Work.category_desc_by_vote_count("album") 
-      expect(best_albums.length).must_equal 4
-      expect(best_albums[0].title).must_equal "OK Computer"
-      expect(best_albums[-1].title).must_equal "Amnesiac"
+      expect(@best_albums.length).must_equal 4
+      expect(@best_albums[0].title).must_equal "OK Computer"
+      expect(@best_albums[-1].title).must_equal "Amnesiac"
     end 
 
-    #how does it handle a tie between works
+    it 'orders by vote count, and breaks ties by alphabetizing by title' do
+      expect(@best_albums[1].title).must_equal "Hail To The Thief"
+      expect(@best_albums[2].title).must_equal "Kid A"
+    end 
 
-
+    it 'also includes titles with zero votes' do
+      expect(@best_albums[-1].votes.count).must_equal 0
+    end  
   end 
   
   # describe "spotlight method" do 
@@ -103,7 +110,7 @@ describe Work do
   #   end
   
   #   it 'returns the most recently upvoted work in the subset of works with the most votes' do
-  #     expect(Work.spotlight).must_equal :httt
-  #   end 
+  #     expect(Work.spotlight).must_equal works(:httt)
   # end 
- end 
+
+end 

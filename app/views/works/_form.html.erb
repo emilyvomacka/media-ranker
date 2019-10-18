@@ -14,7 +14,7 @@
 <%= form_with model: @work, class: "work-input" do |f| %>
   <div>
   <%= f.label :category %>
-  <%= f.select :category, ["book", "album", "movie"] %>
+  <%= f.select :category, Work::CATEGORIES %>
   </div>
   
   <div>
