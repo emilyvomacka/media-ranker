@@ -16,9 +16,9 @@ class Work < ApplicationRecord
       Work.all.each do |work|
         if work.votes.any?
           popular_stuff << work
-          return popular_stuff.sample
         end 
-      end 
+      end
+      return popular_stuff.sample 
     end 
   end 
   
