@@ -41,5 +41,15 @@ describe Vote do
     it "is valid when all fields are present" do
       expect(@vote.valid?).must_equal true
     end 
+
+    it "is invalid without user_id" do
+      @vote.user_id = nil
+      expect(@vote.valid?).must_equal false
+    end 
+
+    it "is invalid without work_id" do
+      @vote.work_id = nil
+      expect(@vote.valid?).must_equal false
+    end 
   end 
 end

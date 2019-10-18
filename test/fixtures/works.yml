@@ -22,6 +22,18 @@ httt:
   creator: Radiohead
   publication_year: "2003"
   description: "2 + 2 = 5"
+in_rainbows: 
+  category: album
+  title: In Rainbows
+  creator: Radiohead  
+  publication_year: "2007"
+  description: 15 step
+tkol: 
+  category: album
+  title: The King Of Limbs
+  creator: Radiohead  
+  publication_year: "2012"  
+  description: bloom
 trickmirror:
   category: book
   title: Trick Mirror 
