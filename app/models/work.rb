@@ -7,15 +7,17 @@ class Work < ApplicationRecord
   CATEGORIES = ["book", "movie", "album"]
   
   def self.spotlight
-    return nil if self.count == 0
-    if self.count > 0 && Vote.count == 0
+    if self.count == 0
+      return nil 
+    elsif Votes.count == 0
       return self.all.sample
-    elsif self.count > 5
-      popular_stuff = self.all.max_by(10) { |x| x.votes.count }
-    else 
-      popular_stuff = self.all.max_by(self.count / 2) { |x| x.votes.count }
+    else
+      popular_stuff = []
+      Works.each do |work|
+        if work.votes.any?
+        popular_stuff << work
+        return popular_stuff.sample
     end 
-    return popular_stuff.sort_by { |work| work.votes.last.created_at }.last
   end 
   
   def self.top_ten(media)
