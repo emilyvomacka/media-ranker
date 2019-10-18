@@ -9,7 +9,7 @@ class Work < ApplicationRecord
   def self.spotlight
     return nil if self.count == 0
     if self.count > 0 && Vote.count == 0
-      return self.sample(1)
+      return self.all.sample
     elsif self.count > 5
       popular_stuff = self.all.max_by(10) { |x| x.votes.count }
     else 
