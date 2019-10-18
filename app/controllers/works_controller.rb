@@ -52,7 +52,7 @@ class WorksController < ApplicationController
       end 
       Vote.create(user_id: session[:user_id], work_id: params[:id])
       flash[:success] = "Successfully upvoted!"
-      redirect_to work_path(@work)
+      redirect_to works_path
     end 
   end 
   
