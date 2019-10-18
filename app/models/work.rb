@@ -3,20 +3,22 @@ class Work < ApplicationRecord
   
   validates :title, presence: true
   validates :creator, presence: true
-
+  
   CATEGORIES = ["book", "movie", "album"]
   
   def self.spotlight
     if self.count == 0
       return nil 
-    elsif Votes.count == 0
+    elsif Vote.count == 0
       return self.all.sample
     else
       popular_stuff = []
-      Works.each do |work|
+      Work.all.each do |work|
         if work.votes.any?
-        popular_stuff << work
-        return popular_stuff.sample
+          popular_stuff << work
+          return popular_stuff.sample
+        end 
+      end 
     end 
   end 
   
@@ -31,9 +33,11 @@ class Work < ApplicationRecord
   end 
   
   def self.category_desc_by_vote_count(media)
-    return nil if self.count == 0
-    category_subset = self.where(category: media)
-    return category_subset.left_joins(:votes).group(:id).order(Arel.sql('COUNT(votes.id) DESC, title'))
-  end 
-end
-
+    if self.count == 0
+      return nil 
+    else 
+      category_subset = self.where(category: media)
+      return category_subset.left_joins(:votes).group(:id).order(Arel.sql('COUNT(votes.id) DESC, title'))
+    end 
+  end
+end 
