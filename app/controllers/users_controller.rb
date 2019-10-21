@@ -9,9 +9,6 @@ class UsersController < ApplicationController
     if user
       session[:user_id] = user.id
       flash[:success] = "Successfully logged in as returning user #{username}"
-      # flash[:goblin] = "The Goblin is HERE"
-      # flash[:warning] = "The number 2"
-      # flash[:error] = "I'm number 1"
     else
       user = User.create(username: username)
       session[:user_id] = user.id
@@ -26,14 +23,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
-  end
-
-  def current
-    @current_user = User.find_by(id: session[:user_id])
-    unless @current_user
-      flash[:error] = "You must be logged in to see this page"
-      redirect_to root_path
-    end
   end
 
   def logout

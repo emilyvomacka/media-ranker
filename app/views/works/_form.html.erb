@@ -14,7 +14,7 @@
 <%= form_with model: @work, class: "work-input" do |f| %>
   <div class="form-group">
   <%= f.label :category %>
-  <%= f.select :category, Work::CATEGORIES, class: "form-control" %>
+  <%= f.select :category, Work::CATEGORIES, {}, { :class => 'form-control' } %>
   </div>
   
   <div class="form-group">

@@ -1,6 +1,6 @@
 <h2>User Summary: <%= link_to @user.username, user_path(@user) %></h2>
 
-<p>Joined site <%= @user.created_at %> </p>
+<p>Joined site <%= readable_date(@user.created_at) %> </p>
 
 <section class="user-votes__container">
   <h3 class="user-votes__header">Votes</h3>
@@ -30,5 +30,5 @@
   </table>
 </section>
 
-<%= link_to "See all Users", users_path %>
-<%= link_to "Back to Media List", works_path %>
+<%= link_to "See all Users", users_path, class: "btn btn-secondary" %>
+<%= link_to "Back to Media List", works_path, class: "btn btn-primary" %>

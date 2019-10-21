@@ -16,7 +16,7 @@ describe Work do
       expect(work).must_respond_to field
     end 
   end 
-
+  
   describe "relationships" do 
     it "can have many votes" do 
       work = works(:okc)
@@ -60,7 +60,7 @@ describe Work do
       before do
         @top_ten = Work.top_ten("album")
       end 
-
+      
       it 'returns 10 items when the list of works is greater than 20' do
         25.times do 
           work = Work.create(category: "album", title: "a", creator: "b", publication_year: "1990", description: "e")
@@ -76,11 +76,11 @@ describe Work do
       it 'returns a list ordered by vote count' do
         assert_operator @top_ten.first.votes.count, :>, @top_ten.last.votes.count
       end 
-
+      
       it 'returns works with a tied number of votes in alphabetical order by title' do
         assert_operator @top_ten[1].title, :<, @top_ten[2].title
       end
-
+      
       it 'returns nil if Work.count = 0' do
         Vote.destroy_all 
         Work.destroy_all
@@ -89,51 +89,50 @@ describe Work do
         end
       end
     end
-  end 
-
-  describe 'category_desc_by_vote_count' do
-    before do
-      @best_albums = Work.category_desc_by_vote_count("album") 
-    end 
     
-    it 'returns a list of all works in a given category ordered by vote count' do
-      expect(@best_albums.length).must_equal 6
-      expect(@best_albums[0].title).must_equal "OK Computer"
-    end 
-
-    it 'orders by vote count, and breaks ties by alphabetizing by title' do
-      expect(@best_albums[1].title).must_equal "Hail To The Thief"
-      expect(@best_albums[2].title).must_equal "Kid A"
-    end 
-
-    it 'also includes titles with zero votes' do
-      expect(@best_albums[-1].votes.count).must_equal 0
-    end  
-
-    it 'returns nil if Work.count = 0' do
-    Vote.destroy_all 
-    Work.destroy_all
-    Work::CATEGORIES.each do |media|
-      assert_nil(Work.category_desc_by_vote_count("media"))
+    describe 'category_desc_by_vote_count' do
+      before do
+        @best_albums = Work.category_desc_by_vote_count("album") 
+      end 
+      
+      it 'returns a list of all works in a given category ordered by vote count' do
+        expect(@best_albums.length).must_equal 6
+        expect(@best_albums[0].title).must_equal "OK Computer"
+      end 
+      
+      it 'orders by vote count, and breaks ties by alphabetizing by title' do
+        expect(@best_albums[1].title).must_equal "Hail To The Thief"
+        expect(@best_albums[2].title).must_equal "Kid A"
+      end 
+      
+      it 'also includes titles with zero votes' do
+        expect(@best_albums[-1].votes.count).must_equal 0
+      end  
+      
+      it 'returns nil if Work.count = 0' do
+        Vote.destroy_all 
+        Work.destroy_all
+        Work::CATEGORIES.each do |media|
+          assert_nil(Work.category_desc_by_vote_count("media"))
+        end
       end
-    end 
-  
-  # describe "spotlight method" do 
-  #   it 'returns a Work object' do
-  #     spotlight = Work.spotlight
-  #     expect(spotlight).must_be_instance_of Work
-  #   end
-  
-  #   it 'returns the most recently upvoted work in the subset of works with the most votes' do
-  #     expect(Work.spotlight).must_equal works(:httt)
-  # end 
-
-  # it 'returns nil if Work.count = 0' do
-  #   Vote.destroy_all 
-  #   Work.destroy_all
-  #   Work::CATEGORIES.each do |media|
-  #     assert_nil(Work.category_desc_by_vote_count("media"))
-  #     end
-  #   end 
+    end  
+    
+    describe "spotlight method" do 
+      it 'returns nil if Work.count == 0' do
+        Vote.destroy_all 
+        Work.destroy_all
+        assert_nil(Work.spotlight)
+      end 
+      
+      it 'returns a random work if Votes.count == 0' do
+        Vote.destroy_all
+        expect(Work.spotlight).must_be_instance_of Work 
+      end 
+      
+      it 'returns a voted-on work when votes are present' do
+        assert_operator Work.spotlight.votes.count, :>, 0 
+      end 
+    end  
   end 
 end 
